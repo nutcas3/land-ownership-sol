@@ -133,4 +133,13 @@ contract Property {
         lands[_propertyId].state = StateOfProperty.Rejected;
         lands[_propertyId].rejectedReason = _reason;
     }
+    function changeStateToOnSale(uint256 _propertyId, address _owner) public {
+        require(lands[_propertyId].propertyId != 0, "Land does not exist");
+        require(
+            lands[_propertyId].owner == _owner,
+            "only owner can make available to sell"
+        );
+
+        lands[_propertyId].state = StateOfProperty.OnSale;
+    }
 }
