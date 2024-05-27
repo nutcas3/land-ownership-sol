@@ -122,5 +122,15 @@ contract Property {
         lands[_propertyId].employeeId = _employeeId;
         lands[_propertyId].state = StateOfProperty.Verified;
     }
+    function changeStateToRejected(
+        uint256 _propertyId,
+        address _employeeId,
+        string memory _reason
+    ) public {
+        require(lands[_propertyId].propertyId != 0, "Land does not exist");
 
+        lands[_propertyId].employeeId = _employeeId;
+        lands[_propertyId].state = StateOfProperty.Rejected;
+        lands[_propertyId].rejectedReason = _reason;
+    }
 }
