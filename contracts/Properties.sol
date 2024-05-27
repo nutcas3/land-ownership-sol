@@ -156,4 +156,19 @@ contract Property {
 
         lands[_propertyId].state = StateOfProperty.Verified;
     }
+
+    function updateOwner(
+        uint256 _propertyId,
+        address newOwner
+    ) public {
+        require(lands[_propertyId].propertyId != 0, "Land does not exist");
+
+        // changing new owner
+        lands[_propertyId].owner = newOwner;
+
+        // changing state back to verified 
+        // after successful ownership transfer
+        lands[_propertyId].state = StateOfProperty.Bought;
+        
+    }
 }
