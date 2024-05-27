@@ -88,5 +88,28 @@ contract Property {
         require(lands[_propertyId].propertyId != 0, "Land does not exist");
         delete lands[_propertyId];
     }
-    
+    function updateLand(
+        uint256 _propertyId,
+        uint256 _locationId,
+        uint256 _revenueDepartmentId,
+        uint256 _surveyNumber,
+        address _owner,
+        uint256 _area,
+        address _employeeId,
+        string memory _scheduledDate,
+        string memory _rejectedReason,
+        StateOfProperty _state
+    ) public {
+        require(lands[_propertyId].propertyId != 0, "Land does not exist");
+
+        lands[_propertyId].locationId = _locationId;
+        lands[_propertyId].revenueDepartmentId = _revenueDepartmentId;
+        lands[_propertyId].surveyNumber = _surveyNumber;
+        lands[_propertyId].owner = _owner;
+        lands[_propertyId].area = _area;
+        lands[_propertyId].employeeId = _employeeId;
+        lands[_propertyId].scheduledDate = _scheduledDate;
+        lands[_propertyId].rejectedReason = _rejectedReason;
+        lands[_propertyId].state = _state;
+    }
 }
