@@ -44,14 +44,14 @@ contract Property {
     ) public returns (uint256) {
         landCount++;
 
-        lands[landCount]  = Land({
+        lands[landCount] = Land({
             propertyId: landCount,
             locationId: _locationId,
             revenueDepartmentId: _revenueDepartmentId,
             surveyNumber: _surveyNumber,
             owner: _owner,
             area: _area,
-            price:0,
+            price: 0,
             registeredTime: block.timestamp,
             employeeId: address(0),
             scheduledDate: "",
@@ -62,26 +62,31 @@ contract Property {
         return landCount;
     }
 
-    function getLandDetailsAsStruct(uint256 _propertyId) public view returns (Land memory){
-            require(lands[_propertyId].propertyId != 0, "Land does not exist");
+    function getLandDetailsAsStruct(
+        uint256 _propertyId
+    ) public view returns (Land memory) {
+        require(lands[_propertyId].propertyId != 0, "Land does not exist");
 
-                
-        return (Land({
-            propertyId: _propertyId,
-            locationId: lands[_propertyId].locationId,
-            revenueDepartmentId: lands[_propertyId].revenueDepartmentId,
-            surveyNumber: lands[_propertyId].surveyNumber,
-            owner: lands[_propertyId].owner,
-            area: lands[_propertyId].area,
-            price:lands[_propertyId].price,
-            registeredTime: lands[_propertyId].registeredTime,
-            employeeId: lands[_propertyId].employeeId,
-            scheduledDate: lands[_propertyId].scheduledDate,
-            rejectedReason: lands[_propertyId].rejectedReason,
-            state: lands[_propertyId].state
-        }));
-
+        return (
+            Land({
+                propertyId: _propertyId,
+                locationId: lands[_propertyId].locationId,
+                revenueDepartmentId: lands[_propertyId].revenueDepartmentId,
+                surveyNumber: lands[_propertyId].surveyNumber,
+                owner: lands[_propertyId].owner,
+                area: lands[_propertyId].area,
+                price: lands[_propertyId].price,
+                registeredTime: lands[_propertyId].registeredTime,
+                employeeId: lands[_propertyId].employeeId,
+                scheduledDate: lands[_propertyId].scheduledDate,
+                rejectedReason: lands[_propertyId].rejectedReason,
+                state: lands[_propertyId].state
+            })
+        );
     }
-
+    function removeLand(uint256 _propertyId) public {
+        require(lands[_propertyId].propertyId != 0, "Land does not exist");
+        delete lands[_propertyId];
     }
+    
 }
