@@ -88,6 +88,7 @@ contract Property {
         require(lands[_propertyId].propertyId != 0, "Land does not exist");
         delete lands[_propertyId];
     }
+
     function updateLand(
         uint256 _propertyId,
         uint256 _locationId,
@@ -122,6 +123,7 @@ contract Property {
         lands[_propertyId].employeeId = _employeeId;
         lands[_propertyId].state = StateOfProperty.Verified;
     }
+
     function changeStateToRejected(
         uint256 _propertyId,
         address _employeeId,
@@ -133,6 +135,7 @@ contract Property {
         lands[_propertyId].state = StateOfProperty.Rejected;
         lands[_propertyId].rejectedReason = _reason;
     }
+
     function changeStateToOnSale(uint256 _propertyId, address _owner) public {
         require(lands[_propertyId].propertyId != 0, "Land does not exist");
         require(
@@ -141,5 +144,16 @@ contract Property {
         );
 
         lands[_propertyId].state = StateOfProperty.OnSale;
+    }
+    
+    //this is when sale is canceled
+    function changeStateBackToVerificed(
+        uint256 _propertyId,
+        address _owner
+    )public{
+        require(lands[_propertyId].propertyId != 0, "Land does not exist");
+        require(lands[_propertyId].owner == _owner, "only owner his allowed" );
+
+        lands[_propertyId].state = StateOfProperty.Verified;
     }
 }
